@@ -27,7 +27,7 @@ Step-3. Cut out those region (i.e. triangle of road lane) of interest from origi
 
 Step-4. Call hough algorithm to detect lines in the image from step3 via cv2.HoughLinesP().
 
-Step-5. Combine detected/colored lines into the origin image (via cv2.addWeighted()) to get the final image in which there is a lane line.
+Step-5. Combine detected/colored lines into the origin image (via cv2.addWeighted()) to get the final image with lane lines.
 
 BTW, still have been thinking on cv2.line() to improve draw_lines function.
 
