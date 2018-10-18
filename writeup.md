@@ -1,11 +1,5 @@
 # **Finding Lane Lines on the Road** 
 
-## Writeup Template
-
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
-
----
-
 **Finding Lane Lines on the Road**
 
 The goals / steps of this project are the following:
@@ -21,28 +15,32 @@ The goals / steps of this project are the following:
 
 ### Reflection
 
-### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
+### 1. My design pipline in functions.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+My pipeline consisted of 5 steps. 
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+Step-1. Converte the images to grayscale via cv2.cvtColor().
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
+Step-2. Use Gaussian blur to make image smooth on related noises via cv2.GaussianBlur() & cv2.Canny().
 
-![alt text][image1]
+Step-3. Cut out those region (i.e. triangle of road lane) of interest from original image in step2 via cv2.fillPoly().
 
+Step-4. Call hough algorithm to detect lines in the image from step3 via cv2.HoughLinesP().
+
+Step-5. Combine detected/colored lines into the origin image (via cv2.addWeighted()) to get the final image in which there is a lane line.
+
+BTW, still have been thinking on cv2.line() to improve draw_lines function.
 
 ### 2. Identify potential shortcomings with your current pipeline
 
-
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
-
+Only got detecting the line in the center triangle of the road and suffered failed result when sensing curving path.
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+Tune the parameters to meet critical situations in following methods
 
-Another potential improvement could be to ...
-
+    gauss_img = gaussian_blur(color_masked, 7)
+    
+    canny_img = canny(gauss_img, 100, 150) # edge detection
+    
+    ...
